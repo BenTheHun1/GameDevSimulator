@@ -9,6 +9,8 @@ public class Upgrade : MonoBehaviour
     public Text disDesc;
     public Text disCost;
     public Button disButton;
+    public Image disProgress;
+    public Text disProgressText;
 
     public string nam;
     public string desc;
@@ -25,7 +27,7 @@ public class Upgrade : MonoBehaviour
     public int upgradeValue;
     public bool ShowThing;
     public GameObject ThingToShow;
-    
+
     public enum quantity
     {
         Repeatable,
@@ -35,10 +37,12 @@ public class Upgrade : MonoBehaviour
     public quantity upgradeKind;
 
     public bool isProject;
-    public int timeToFinish;
-    
+    public float timeToFinish;
+
     public int peek;
 
+    bool projectCountdown;
+    float curTTF;
 
     // Start is called before the first frame update
     void Start()
@@ -48,10 +52,13 @@ public class Upgrade : MonoBehaviour
         if (isProject)
         {
             disCost.text = cost.ToString();
+            disProgress.gameObject.SetActive(true);
+            disProgressText.text = timeToFinish.ToString();
         }
         else
         {
             disCost.text = "$" + cost.ToString();
+            disProgress.gameObject.SetActive(false);
         }
         disButton.onClick.AddListener(Buy);
     }
@@ -59,10 +66,11 @@ public class Upgrade : MonoBehaviour
     public void Buy()
     {
         bool successfulPurchase = false;
-        if (isProject && GameManager.pts >= cost)
+        if (isProject && GameManager.pts >= cost && !projectCountdown)
         {
             GameManager.pts -= cost;
-            successfulPurchase = true;
+            projectCountdown = true;
+            curTTF = timeToFinish;
         }
         else if (!isProject && GameManager.money >= cost)
         {
@@ -72,49 +80,67 @@ public class Upgrade : MonoBehaviour
 
         if (successfulPurchase)
         {
-            if (upgradeType == type.ClickAdd)
-            {
-                GameManager.ClickAmount += upgradeValue;
-            }
-            else if (upgradeType == type.ClickMult)
-            {
-                GameManager.ClickAmount *= upgradeValue;
-            }
-            else if (upgradeType == type.AutoAdd)
-            {
-                GameManager.AutoClick += upgradeValue;
-            }
-            else if (upgradeType == type.AutoMult)
-            {
-                GameManager.AutoClick *= upgradeValue;
-            }
-            else if (upgradeType == type.MoneyAdd)
-            {
-                GameManager.money += upgradeValue;
-            }
-            if (ShowThing)
-            {
-                ThingToShow.SetActive(true);
-            }
-            if (upgradeKind == quantity.Single)
-            {
-                Destroy(gameObject);
-            }
-            else if (upgradeKind == quantity.Repeatable)
-            {
-                float newCost = cost * 1.5f;
-                cost = Mathf.RoundToInt(newCost);
-                disCost.text = cost.ToString();
-            }
+            BuySuccess();
+        }
+    }
+
+    void BuySuccess()
+    {
+        if (upgradeType == type.ClickAdd)
+        {
+            GameManager.ClickAmount += upgradeValue;
+        }
+        else if (upgradeType == type.ClickMult)
+        {
+            GameManager.ClickAmount *= upgradeValue;
+        }
+        else if (upgradeType == type.AutoAdd)
+        {
+            GameManager.AutoClick += upgradeValue;
+        }
+        else if (upgradeType == type.AutoMult)
+        {
+            GameManager.AutoClick *= upgradeValue;
+        }
+        else if (upgradeType == type.MoneyAdd)
+        {
+            GameManager.money += upgradeValue;
+        }
+        if (ShowThing)
+        {
+            ThingToShow.SetActive(true);
+        }
+        if (upgradeKind == quantity.Single)
+        {
+            Destroy(gameObject);
+        }
+        else if (upgradeKind == quantity.Repeatable)
+        {
+            float newCost = cost * 1.5f;
+            cost = Mathf.RoundToInt(newCost);
+            disCost.text = cost.ToString();
+        }
+        if (isProject)
+        {
+            disProgressText.text = timeToFinish.ToString();
+            disProgress.fillAmount = 1f;
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.pts >= peek)
+        if (projectCountdown)
         {
-            //TBD
+            disProgress.fillAmount = curTTF / timeToFinish;
+            curTTF -= Time.deltaTime;
+            disProgressText.text = curTTF.ToString("F0");
+            if (curTTF <= 0)
+            {
+                BuySuccess();
+                projectCountdown = false;
+            }
+            
         }
     }
 }

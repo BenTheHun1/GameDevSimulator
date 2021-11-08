@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour
     public void Click()
     {
         pts += ClickAmount;
+        displayClickAmount.gameObject.GetComponent<AudioSource>().Play();
     }
 
     public void MoveCam(string dir)
