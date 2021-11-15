@@ -694,15 +694,16 @@ MonoBehaviour:
   disProgressText: {fileID: 8005623623128534746}
   nam: Make a Game
   desc: Make a simple game, to get some money.
-  cost: 100
+  startingCost: 100
+  currentCost: 0
   upgradeType: 4
   upgradeValue: 10
   ShowThing: 0
   ThingToShow: {fileID: 0}
+  timesPurchased: 0
   upgradeKind: 2
   isProject: 1
   timeToFinish: 5
-  peek: 100
 --- !u!1 &8542551865124799862
 GameObject:
   m_ObjectHideFlags: 0

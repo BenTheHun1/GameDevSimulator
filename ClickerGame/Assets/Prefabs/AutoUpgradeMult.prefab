@@ -694,15 +694,16 @@ MonoBehaviour:
   disProgressText: {fileID: 8005623623128534746}
   nam: Code a Better AI
   desc: Double the efficiency of your AI
-  cost: 2000
+  startingCost: 2000
+  currentCost: 0
   upgradeType: 3
   upgradeValue: 2
   ShowThing: 0
   ThingToShow: {fileID: 0}
+  timesPurchased: 0
   upgradeKind: 1
   isProject: 1
   timeToFinish: 20
-  peek: 100
 --- !u!1 &8542551865124799862
 GameObject:
   m_ObjectHideFlags: 0
