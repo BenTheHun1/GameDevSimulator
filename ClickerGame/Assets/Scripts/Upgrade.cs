@@ -14,7 +14,8 @@ public class Upgrade : MonoBehaviour
     GameManager gm;
     public string nam;
     public string desc;
-    public int cost;
+    public int startingCost;
+    public int currentCost;
     public enum type
     {
         ClickAdd,
@@ -47,18 +48,19 @@ public class Upgrade : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        currentCost = startingCost;
         gm = GameObject.Find("WorldCanvas").GetComponent<GameManager>();
         disName.text = nam;
         disDesc.text = desc;
         if (isProject)
         {
-            disCost.text = cost.ToString();
+            disCost.text = currentCost.ToString();
             disProgress.gameObject.SetActive(true);
             disProgressText.text = timeToFinish.ToString();
         }
         else
         {
-            disCost.text = "$" + cost.ToString();
+            disCost.text = "$" + currentCost.ToString();
             disProgress.gameObject.SetActive(false);
         }
         disButton.onClick.AddListener(Buy);
@@ -66,15 +68,15 @@ public class Upgrade : MonoBehaviour
 
     public void Buy()
     {
-        if (isProject && gm.pts >= cost && !projectCountdown)
+        if (isProject && gm.pts >= currentCost && !projectCountdown)
         {
-            gm.pts -= cost;
+            gm.pts -= currentCost;
             projectCountdown = true;
             curTTF = timeToFinish;
         }
-        else if (!isProject && gm.money >= cost)
+        else if (!isProject && gm.money >= currentCost)
         {
-            gm.money -= cost;
+            gm.money -= currentCost;
             BuySuccess();
         }
     }
@@ -112,13 +114,12 @@ public class Upgrade : MonoBehaviour
         }
         else if (upgradeKind == quantity.Repeatable)
         {
-            float newCost = cost * (timesPurchased^2); //TBD
-            cost = Mathf.RoundToInt(newCost);
-            disCost.text = "$" + cost.ToString();
+            currentCost = startingCost * Mathf.FloorToInt(Mathf.Pow(timesPurchased+1, 2)); //TBD
+            disCost.text = "$" + currentCost.ToString();
         }
         if (isProject)
         {
-            disCost.text = cost.ToString();
+            disCost.text = currentCost.ToString();
             disProgressText.text = timeToFinish.ToString();
             disProgress.fillAmount = 1f;
         }

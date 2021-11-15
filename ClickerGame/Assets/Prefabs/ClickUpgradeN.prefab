@@ -694,15 +694,16 @@ MonoBehaviour:
   disProgressText: {fileID: 8005623623128534746}
   nam: Take Programming Class
   desc: Get better at coding, to code faster!
-  cost: 20
+  startingCost: 20
+  currentCost: 0
   upgradeType: 0
   upgradeValue: 1
   ShowThing: 0
   ThingToShow: {fileID: 0}
+  timesPurchased: 0
   upgradeKind: 0
   isProject: 0
   timeToFinish: 0
-  peek: 20
 --- !u!1 &8542551865124799862
 GameObject:
   m_ObjectHideFlags: 0

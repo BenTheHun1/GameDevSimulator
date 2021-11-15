@@ -694,15 +694,16 @@ MonoBehaviour:
   disProgressText: {fileID: 8005623623128534746}
   nam: Write an AI
   desc: Make an AI to write code for you.
-  cost: 60
+  startingCost: 40
+  currentCost: 0
   upgradeType: 2
   upgradeValue: 1
   ShowThing: 0
   ThingToShow: {fileID: 0}
+  timesPurchased: 0
   upgradeKind: 0
   isProject: 1
   timeToFinish: 3
-  peek: 100
 --- !u!1 &8542551865124799862
 GameObject:
   m_ObjectHideFlags: 0
