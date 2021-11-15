@@ -28,6 +28,8 @@ public class Upgrade : MonoBehaviour
     public bool ShowThing;
     public GameObject ThingToShow;
 
+    public int timesPurchased;
+
     public enum quantity
     {
         Repeatable,
@@ -38,8 +40,6 @@ public class Upgrade : MonoBehaviour
 
     public bool isProject;
     public float timeToFinish;
-
-    public int peek;
 
     bool projectCountdown;
     float curTTF;
@@ -66,7 +66,6 @@ public class Upgrade : MonoBehaviour
 
     public void Buy()
     {
-        bool successfulPurchase = false;
         if (isProject && gm.pts >= cost && !projectCountdown)
         {
             gm.pts -= cost;
@@ -76,11 +75,6 @@ public class Upgrade : MonoBehaviour
         else if (!isProject && gm.money >= cost)
         {
             gm.money -= cost;
-            successfulPurchase = true;
-        }
-
-        if (successfulPurchase)
-        {
             BuySuccess();
         }
     }
@@ -111,18 +105,20 @@ public class Upgrade : MonoBehaviour
         {
             ThingToShow.SetActive(true);
         }
+        timesPurchased++;
         if (upgradeKind == quantity.Single)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
         else if (upgradeKind == quantity.Repeatable)
         {
-            float newCost = cost * 1.5f;
+            float newCost = cost * (timesPurchased^2); //TBD
             cost = Mathf.RoundToInt(newCost);
-            disCost.text = cost.ToString();
+            disCost.text = "$" + cost.ToString();
         }
         if (isProject)
         {
+            disCost.text = cost.ToString();
             disProgressText.text = timeToFinish.ToString();
             disProgress.fillAmount = 1f;
         }

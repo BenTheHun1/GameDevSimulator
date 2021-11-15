@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         ClickAmount = 1;
+        pts = 1000;
+        money = 1000;
         foreach(GameObject up in upgradeList)
         {
             if (!up.GetComponent<Upgrade>().isProject)
@@ -37,7 +39,6 @@ public class GameManager : MonoBehaviour
                 Instantiate(up, projectContainer);
             }
         }
-        
     }
 
     // Update is called once per frame
@@ -71,6 +72,10 @@ public class GameManager : MonoBehaviour
         else if (dir == "r")
         {
             desiredPosition = 230;
+        }
+        else if (dir == "ll")
+        {
+            desiredPosition = -460;
         }
     }
 
