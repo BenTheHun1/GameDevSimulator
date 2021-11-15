@@ -11,7 +11,7 @@ public class Upgrade : MonoBehaviour
     public Button disButton;
     public Image disProgress;
     public Text disProgressText;
-
+    GameManager gm;
     public string nam;
     public string desc;
     public int cost;
@@ -47,6 +47,7 @@ public class Upgrade : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gm = GameObject.Find("WorldCanvas").GetComponent<GameManager>();
         disName.text = nam;
         disDesc.text = desc;
         if (isProject)
@@ -66,15 +67,15 @@ public class Upgrade : MonoBehaviour
     public void Buy()
     {
         bool successfulPurchase = false;
-        if (isProject && GameManager.pts >= cost && !projectCountdown)
+        if (isProject && gm.pts >= cost && !projectCountdown)
         {
-            GameManager.pts -= cost;
+            gm.pts -= cost;
             projectCountdown = true;
             curTTF = timeToFinish;
         }
-        else if (!isProject && GameManager.money >= cost)
+        else if (!isProject && gm.money >= cost)
         {
-            GameManager.money -= cost;
+            gm.money -= cost;
             successfulPurchase = true;
         }
 
@@ -88,23 +89,23 @@ public class Upgrade : MonoBehaviour
     {
         if (upgradeType == type.ClickAdd)
         {
-            GameManager.ClickAmount += upgradeValue;
+            gm.ClickAmount += upgradeValue;
         }
         else if (upgradeType == type.ClickMult)
         {
-            GameManager.ClickAmount *= upgradeValue;
+            gm.ClickAmount *= upgradeValue;
         }
         else if (upgradeType == type.AutoAdd)
         {
-            GameManager.AutoClick += upgradeValue;
+            gm.AutoClick += upgradeValue;
         }
         else if (upgradeType == type.AutoMult)
         {
-            GameManager.AutoClick *= upgradeValue;
+            gm.AutoClick *= upgradeValue;
         }
         else if (upgradeType == type.MoneyAdd)
         {
-            GameManager.money += upgradeValue;
+            gm.money += upgradeValue;
         }
         if (ShowThing)
         {

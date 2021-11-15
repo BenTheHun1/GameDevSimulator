@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public static float pts;
-    public static float money;
-    public static int ClickAmount;
-    public static int AutoClick;
+    public float pts;
+    public float money;
+    public int ClickAmount;
+    public int AutoClick;
     public int desiredPosition;
     public float camSpeed;
     public Text displayPts;
