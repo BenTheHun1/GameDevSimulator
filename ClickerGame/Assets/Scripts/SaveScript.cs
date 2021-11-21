@@ -15,6 +15,13 @@ public class SaveScript : MonoBehaviour
     {
         gm = GetComponent<GameManager>();
         savePath = Application.persistentDataPath + "/gamesave.sav";
+        StartCoroutine(LateStart());
+    }
+
+    IEnumerator LateStart()
+    {
+        yield return new WaitForSeconds(0.25f);
+        LoadData();
     }
 
     // Update is called once per frame
