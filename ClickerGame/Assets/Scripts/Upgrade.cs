@@ -97,7 +97,7 @@ public class Upgrade : MonoBehaviour
         }
         else if (upgradeType == type.AutoMult)
         {
-            gm.AutoClick *= upgradeValue;
+            gm.AutoMult *= upgradeValue;
         }
         else if (upgradeType == type.MoneyAdd)
         {

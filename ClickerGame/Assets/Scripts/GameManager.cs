@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public int ClickAmount;
     public int ClickMult;
     public int AutoClick;
+    public int AutoMult;
     public int desiredPosition;
     public float camSpeed;
     public Text displayPts;
@@ -28,8 +29,10 @@ public class GameManager : MonoBehaviour
     {
         ClickAmount = 1;
         ClickMult = 1;
-        pts = 1000;
-        money = 1000;
+        AutoClick = 0;
+        AutoMult = 1;
+        pts = 10000; //debug
+        money = 10000; //debug
         foreach(GameObject up in upgradeList)
         {
             if (!up.GetComponent<Upgrade>().isProject)
@@ -46,7 +49,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        pts += AutoClick * Time.deltaTime;
+        pts += AutoClick * AutoMult * Time.deltaTime;
         displayPts.text = pts.ToString("F0");
         displayMoney.text = "$" + money.ToString("F2");
         displayClickAmount.text = "Click: " + ClickAmount.ToString();
@@ -55,6 +58,10 @@ public class GameManager : MonoBehaviour
             displayClickAmount.text += " x " + ClickMult.ToString() + " = " + (ClickAmount * ClickMult).ToString();
         }
         displayAutoClick.text = "Auto: "+ AutoClick.ToString();
+        if (AutoMult > 1)
+        {
+            displayAutoClick.text += " x " + AutoMult.ToString() + " = " + (AutoClick * AutoMult).ToString();
+        }
         cam.transform.position = Vector3.Lerp(cam.transform.position, new Vector3(desiredPosition, cam.transform.position.y, cam.transform.position.z), Time.deltaTime * camSpeed);
 
     }
