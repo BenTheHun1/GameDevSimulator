@@ -1018,6 +1018,7 @@ MonoBehaviour:
   pts: 0
   money: 0
   ClickAmount: 0
+  ClickMult: 0
   AutoClick: 0
   desiredPosition: 0
   camSpeed: 3
@@ -1202,7 +1203,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 360}
-  m_SizeDelta: {x: 300, y: 51.599976}
+  m_SizeDelta: {x: 450, y: 51.599976}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1446555811
 MonoBehaviour:
@@ -2510,7 +2511,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 300}
-  m_SizeDelta: {x: 300, y: 51.599976}
+  m_SizeDelta: {x: 450, y: 51.599976}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2059410399
 MonoBehaviour:

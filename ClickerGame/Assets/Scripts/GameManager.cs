@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public float pts;
     public float money;
     public int ClickAmount;
+    public int ClickMult;
     public int AutoClick;
     public int desiredPosition;
     public float camSpeed;
@@ -26,6 +27,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         ClickAmount = 1;
+        ClickMult = 1;
         pts = 1000;
         money = 1000;
         foreach(GameObject up in upgradeList)
@@ -48,6 +50,10 @@ public class GameManager : MonoBehaviour
         displayPts.text = pts.ToString("F0");
         displayMoney.text = "$" + money.ToString("F2");
         displayClickAmount.text = "Click: " + ClickAmount.ToString();
+        if (ClickMult > 1)
+        {
+            displayClickAmount.text += " x " + ClickMult.ToString() + " = " + (ClickAmount * ClickMult).ToString();
+        }
         displayAutoClick.text = "Auto: "+ AutoClick.ToString();
         cam.transform.position = Vector3.Lerp(cam.transform.position, new Vector3(desiredPosition, cam.transform.position.y, cam.transform.position.z), Time.deltaTime * camSpeed);
 
@@ -55,7 +61,7 @@ public class GameManager : MonoBehaviour
 
     public void Click()
     {
-        pts += ClickAmount;
+        pts += ClickAmount * ClickMult;
         displayClickAmount.gameObject.GetComponent<AudioSource>().Play();
     }
 

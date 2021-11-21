@@ -89,7 +89,7 @@ public class Upgrade : MonoBehaviour
         }
         else if (upgradeType == type.ClickMult)
         {
-            gm.ClickAmount *= upgradeValue;
+            gm.ClickMult *= upgradeValue;
         }
         else if (upgradeType == type.AutoAdd)
         {
