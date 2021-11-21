@@ -131,7 +131,7 @@ public class Upgrade : MonoBehaviour
         if (projectCountdown)
         {
             disProgress.fillAmount = curTTF / timeToFinish;
-            curTTF -= Time.deltaTime;
+            curTTF -= Time.deltaTime * gm.RAMSpeed;
             disProgressText.text = curTTF.ToString("F0");
             if (curTTF <= 0)
             {

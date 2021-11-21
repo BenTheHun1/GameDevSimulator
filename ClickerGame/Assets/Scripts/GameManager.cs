@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public int AutoClick;
     public int AutoMult;
     public int desiredPosition;
+    public int RAMSpeed;
     public float camSpeed;
     public Text displayPts;
     public Text displayMoney;
@@ -31,6 +32,7 @@ public class GameManager : MonoBehaviour
         ClickMult = 1;
         AutoClick = 0;
         AutoMult = 1;
+        RAMSpeed = 1;
         pts = 10000; //debug
         money = 10000; //debug
         foreach(GameObject up in upgradeList)
