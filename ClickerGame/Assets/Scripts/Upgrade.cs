@@ -141,4 +141,27 @@ public class Upgrade : MonoBehaviour
             
         }
     }
+
+    public void Reload()
+    {
+        if (timesPurchased >= 1)
+        {
+            if (upgradeKind == quantity.Single)
+            {
+                gameObject.SetActive(false);
+            }
+            else if (upgradeKind == quantity.Repeatable)
+            {
+                currentCost = startingCost * Mathf.FloorToInt(Mathf.Pow(timesPurchased + 1, 2)); //TBD
+                disCost.text = "$" + currentCost.ToString();
+            }
+            if (isProject)
+            {
+                disCost.text = currentCost.ToString();
+                disProgressText.text = timeToFinish.ToString();
+                disProgress.fillAmount = 1f;
+            }
+        }
+        
+    }
 }

@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     public Transform upgradeContainer;
     public Transform projectContainer;
     public List<GameObject> upgradeList;
+    public List<GameObject> upgradesInScene;
 
     public Text displayClickAmount;
     public Text displayAutoClick;
@@ -39,11 +40,11 @@ public class GameManager : MonoBehaviour
         {
             if (!up.GetComponent<Upgrade>().isProject)
             {
-                Instantiate(up, upgradeContainer);
+                upgradesInScene.Add(Instantiate(up, upgradeContainer));
             }
             else
             {
-                Instantiate(up, projectContainer);
+                upgradesInScene.Add(Instantiate(up, projectContainer));
             }
         }
     }
@@ -91,6 +92,10 @@ public class GameManager : MonoBehaviour
         else if (dir == "ll")
         {
             desiredPosition = -460;
+        }
+        else if (dir == "rr")
+        {
+            desiredPosition = 460;
         }
     }
 

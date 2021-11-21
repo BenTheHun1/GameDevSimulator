@@ -9,5 +9,7 @@ public class Save
     public float ptsSaved;
     public float moneySaved;
     public int ClickAmountSaved;
+    public int ClickMultSaved;
     public int AutoClickSaved;
+    public int AutoMultSaved;
 }
