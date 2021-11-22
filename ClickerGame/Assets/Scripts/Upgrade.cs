@@ -22,7 +22,9 @@ public class Upgrade : MonoBehaviour
         ClickMult,
         AutoAdd,
         AutoMult,
-        MoneyAdd
+        MoneyAdd,
+        RAMAdd,
+        RAMMult
     }
     public type upgradeType;
     public int upgradeValue;
@@ -102,6 +104,14 @@ public class Upgrade : MonoBehaviour
         else if (upgradeType == type.MoneyAdd)
         {
             gm.money += upgradeValue;
+        }
+        else if (upgradeType == type.RAMAdd)
+        {
+            gm.RAMSpeed += upgradeValue;
+        }
+        else if (upgradeType == type.RAMMult)
+        {
+            gm.RAMSpeed *= upgradeValue;
         }
         if (ShowThing)
         {

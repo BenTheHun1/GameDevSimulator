@@ -3,16 +3,22 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(GameManager))]
 public class SaveScript : MonoBehaviour
 {
     private GameManager gm;
     private string savePath;
+    public Text disAutoSave;
+    private float AutoSaveTime;
+    private float AutoSaveTimeCurrent;
 
     // Start is called before the first frame update
     void Start()
     {
+        AutoSaveTime = 30f;
+        AutoSaveTimeCurrent = AutoSaveTime;
         gm = GetComponent<GameManager>();
         savePath = Application.persistentDataPath + "/gamesave.sav";
         StartCoroutine(LateStart());
@@ -20,8 +26,32 @@ public class SaveScript : MonoBehaviour
 
     IEnumerator LateStart()
     {
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.5f);
         LoadData();
+    }
+
+    private void Update()
+    {
+        AutoSaveTimeCurrent -= Time.deltaTime;
+        disAutoSave.text = "AutoSave in " + AutoSaveTimeCurrent.ToString("F0");
+        if (AutoSaveTimeCurrent <= 0)
+        {
+            SaveData();
+            AutoSaveTimeCurrent = AutoSaveTime;
+        }
+    }
+
+    public void DeleteSave()
+    {
+        if (File.Exists(savePath))
+        {
+            File.Delete(savePath);
+            Debug.Log("Save Deleted");
+        }
+        else
+        {
+            Debug.LogWarning("No Save Found");
+        }
     }
 
     // Update is called once per frame

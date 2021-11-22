@@ -34,8 +34,8 @@ public class GameManager : MonoBehaviour
         AutoClick = 0;
         AutoMult = 1;
         RAMSpeed = 1;
-        pts = 10000; //debug
-        money = 10000; //debug
+        //pts = 10000; //debug
+        //money = 10000; //debug
         foreach(GameObject up in upgradeList)
         {
             if (!up.GetComponent<Upgrade>().isProject)

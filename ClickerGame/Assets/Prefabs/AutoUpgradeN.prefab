@@ -692,8 +692,8 @@ MonoBehaviour:
   disButton: {fileID: 2264820243872912095}
   disProgress: {fileID: 8487910938270135781}
   disProgressText: {fileID: 8005623623128534746}
-  nam: Write an AI
-  desc: Make an AI to write code for you.
+  nam: Write a bat file
+  desc: Write a bat file to automate your work.
   startingCost: 40
   currentCost: 0
   upgradeType: 2
