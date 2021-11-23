@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         pts += AutoClick * AutoMult * Time.deltaTime;
-        displayPts.text = pts.ToString("F0");
+        displayPts.text = pts.ToString("F0") + " Codes";
         displayMoney.text = "$" + money.ToString("F2");
         displayClickAmount.text = "Click: " + ClickAmount.ToString();
         if (ClickMult > 1)
