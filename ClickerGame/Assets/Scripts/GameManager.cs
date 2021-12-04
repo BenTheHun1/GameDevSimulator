@@ -26,9 +26,12 @@ public class GameManager : MonoBehaviour
     public Text displayClickAmount;
     public Text displayAutoClick;
 
+    NumberManager nm;
+
     // Start is called before the first frame update
     void Start()
     {
+        nm = gameObject.GetComponent<NumberManager>();
         ClickAmount = 1;
         ClickMult = 1;
         AutoClick = 0;
@@ -52,15 +55,15 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        pts += AutoClick * AutoMult * Time.deltaTime;
-        displayPts.text = pts.ToString("F0") + " Codes";
+        nm.Add(Mathf.RoundToInt(AutoClick * AutoMult * Time.deltaTime * 1000), 0);
+        //displayPts.text = pts.ToString("F0") + " Codes";
         displayMoney.text = "$" + money.ToString("F2");
-        displayClickAmount.text = "Click: " + ClickAmount.ToString();
+        displayClickAmount.text = "Code/Click: " + ClickAmount.ToString();
         if (ClickMult > 1)
         {
             displayClickAmount.text += " x " + ClickMult.ToString() + " = " + (ClickAmount * ClickMult).ToString();
         }
-        displayAutoClick.text = "Auto: "+ AutoClick.ToString();
+        displayAutoClick.text = "Code/Sec: "+ AutoClick.ToString();
         if (AutoMult > 1)
         {
             displayAutoClick.text += " x " + AutoMult.ToString() + " = " + (AutoClick * AutoMult).ToString();
@@ -71,7 +74,7 @@ public class GameManager : MonoBehaviour
 
     public void Click()
     {
-        pts += ClickAmount * ClickMult;
+        nm.Add(ClickAmount * ClickMult, 1);
         displayClickAmount.gameObject.GetComponent<AudioSource>().Play();
     }
 
