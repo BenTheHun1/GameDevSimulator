@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public float pts;
     public float money;
     public int ClickAmount;
     public int ClickMult;
@@ -26,12 +25,18 @@ public class GameManager : MonoBehaviour
     public Text displayClickAmount;
     public Text displayAutoClick;
 
-    NumberManager nm;
+    public NumberManager nm;
+    public int era;
+    public EvolveManager em;
+    public string moneyType;
+    public ParticleSystem clickparticles;
 
     // Start is called before the first frame update
     void Start()
     {
         nm = gameObject.GetComponent<NumberManager>();
+        em = gameObject.GetComponent<EvolveManager>();
+        era = 1;
         ClickAmount = 1;
         ClickMult = 1;
         AutoClick = 0;
@@ -50,20 +55,25 @@ public class GameManager : MonoBehaviour
                 upgradesInScene.Add(Instantiate(up, projectContainer));
             }
         }
+        InvokeRepeating("Auto", 1.0f, 1.0f);
+    }
+
+    void Auto()
+    {
+        nm.Add(AutoClick * AutoMult, 1);
     }
 
     // Update is called once per frame
     void Update()
     {
-        nm.Add(Mathf.RoundToInt(AutoClick * AutoMult * Time.deltaTime * 1000), 0);
         //displayPts.text = pts.ToString("F0") + " Codes";
-        displayMoney.text = "$" + money.ToString("F2");
-        displayClickAmount.text = "Code/Click: " + ClickAmount.ToString();
+        displayMoney.text = money.ToString("F2") + " " + moneyType;
+        displayClickAmount.text = nm.resourceType + "/Click: " + ClickAmount.ToString();
         if (ClickMult > 1)
         {
             displayClickAmount.text += " x " + ClickMult.ToString() + " = " + (ClickAmount * ClickMult).ToString();
         }
-        displayAutoClick.text = "Code/Sec: "+ AutoClick.ToString();
+        displayAutoClick.text = nm.resourceType + "/Sec: " + AutoClick.ToString();
         if (AutoMult > 1)
         {
             displayAutoClick.text += " x " + AutoMult.ToString() + " = " + (AutoClick * AutoMult).ToString();
@@ -76,6 +86,7 @@ public class GameManager : MonoBehaviour
     {
         nm.Add(ClickAmount * ClickMult, 1);
         displayClickAmount.gameObject.GetComponent<AudioSource>().Play();
+        clickparticles.Play();
     }
 
     public void MoveCam(string dir)

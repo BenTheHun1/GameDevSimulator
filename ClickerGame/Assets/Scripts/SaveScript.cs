@@ -28,6 +28,8 @@ public class SaveScript : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         LoadData();
+        yield return new WaitForSeconds(0.25f);
+        gm.em.ReloadEra();
     }
 
     private void Update()
@@ -59,12 +61,15 @@ public class SaveScript : MonoBehaviour
     {
         var save = new Save()
         {
-            ptsSaved = gm.pts,
+            disNumSaved = gm.nm.disNum,
+            disNumAbbSaved = gm.nm.disNumAbb,
+            overNumSaved = gm.nm.overNum,
             moneySaved = gm.money,
             ClickAmountSaved = gm.ClickAmount,
             ClickMultSaved = gm.ClickMult,
             AutoClickSaved = gm.AutoClick,
             AutoMultSaved = gm.AutoMult,
+            eraSaved = gm.era,
             upgradesTimesPurchased = new List<int>()
         };
         foreach (GameObject upgrade in gm.upgradesInScene)
@@ -94,13 +99,15 @@ public class SaveScript : MonoBehaviour
                 save = (Save)bf.Deserialize(fileStream);
             }
 
-            gm.pts = save.ptsSaved;
+            gm.nm.disNum = save.disNumSaved;
+            gm.nm.disNumAbb = save.disNumAbbSaved;
+            gm.nm.overNum = save.overNumSaved;
             gm.money = save.moneySaved;
             gm.ClickAmount = save.ClickAmountSaved;
             gm.ClickMult = save.ClickMultSaved;
             gm.AutoClick = save.AutoClickSaved;
             gm.AutoMult = save.AutoMultSaved;
-
+            gm.era = save.eraSaved;
             for (int i = 0; i < gm.upgradeList.Count; i++) 
             {
                 gm.upgradesInScene[i].GetComponent<Upgrade>().timesPurchased = save.upgradesTimesPurchased[i];

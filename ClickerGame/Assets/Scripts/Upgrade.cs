@@ -70,15 +70,15 @@ public class Upgrade : MonoBehaviour
 
     public void Buy()
     {
-        if (isProject && gm.pts >= currentCost && !projectCountdown)
+        if (isProject && gm.nm.disNum >= currentCost && !projectCountdown)
         {
-            gm.pts -= currentCost;
+            gm.nm.Sub(currentCost, 1);
             projectCountdown = true;
             curTTF = timeToFinish;
         }
         else if (!isProject && gm.money >= currentCost)
         {
-            gm.money -= currentCost;
+            gm.nm.Sub(currentCost, 1);
             BuySuccess();
         }
     }

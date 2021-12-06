@@ -25,16 +25,21 @@ public class NumberManager : MonoBehaviour
         gm = gameObject.GetComponent<GameManager>();
         abb = new string[]
         {
-             "", ".", "Tho", "Mil", "Bil", "Tri", "Qua", "Qui"
+             "", ".", "T", "M", "B", "T", "Q", "Q"
         };
         disNumAbb = 1;
-        resourceType = "Codes";
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        gm.displayPts.text = disNum + abb[disNumAbb] + overNum.ToString("000") + abb[disNumAbb - 1] + " " + resourceType;
+    }
+
+    public string FormatForDisplay(int num, int numAbb)
+    {
+        string formatted = num + abb[numAbb];
+        return formatted;
     }
 
     public void Add(int NumToAdd, int AbbOfNumToAdd)
@@ -55,11 +60,29 @@ public class NumberManager : MonoBehaviour
         if (disNum.ToString().Length > 3)
         {
             overNum = int.Parse(disNum.ToString().Substring(disNum.ToString().Length - 3));
-            Debug.Log(overNum);
             disNum /= 1000;
             disNumAbb++;
         }
-        gm.displayPts.text = disNum + abb[disNumAbb] + overNum.ToString("000") + abb[disNumAbb - 1] + " " + resourceType;
+    }
+
+    public void Sub(int NumToSub, int AbbOfNumToSub)
+    {
+        if (AbbOfNumToSub == disNumAbb)
+        {
+            disNum -= NumToSub;
+        }
+        else if (AbbOfNumToSub == disNumAbb - 1)
+        {
+            overNum -= NumToSub;
+        }
+        if (disNum < 0)
+        {
+            disNumAbb -= 1;
+            overNum -= disNum;
+            disNum = overNum;
+            overNum = 0;
+        }
+       
     }
 
 }
