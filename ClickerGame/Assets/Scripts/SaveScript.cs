@@ -4,6 +4,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(GameManager))]
 public class SaveScript : MonoBehaviour
@@ -14,9 +15,15 @@ public class SaveScript : MonoBehaviour
     private float AutoSaveTime;
     private float AutoSaveTimeCurrent;
 
+    public GameObject deleteSaveConfirm;
+
+    public GameObject loading;
+
     // Start is called before the first frame update
     void Start()
     {
+        loading.SetActive(true);
+        deleteSaveConfirm.SetActive(false);
         AutoSaveTime = 30f;
         AutoSaveTimeCurrent = AutoSaveTime;
         gm = GetComponent<GameManager>();
@@ -30,6 +37,7 @@ public class SaveScript : MonoBehaviour
         LoadData();
         yield return new WaitForSeconds(0.25f);
         gm.em.ReloadEra();
+        loading.SetActive(false);
     }
 
     private void Update()
@@ -43,16 +51,29 @@ public class SaveScript : MonoBehaviour
         }
     }
 
+    public void OpenDeleteMenu()
+    {
+        deleteSaveConfirm.SetActive(true);
+    }
+
+    public void CloseDeleteMenu()
+    {
+        deleteSaveConfirm.SetActive(false);
+    }
+
+
     public void DeleteSave()
     {
         if (File.Exists(savePath))
         {
             File.Delete(savePath);
             Debug.Log("Save Deleted");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
         else
         {
             Debug.LogWarning("No Save Found");
+            CloseDeleteMenu();
         }
     }
 
@@ -61,10 +82,7 @@ public class SaveScript : MonoBehaviour
     {
         var save = new Save()
         {
-            disNumSaved = gm.nm.disNum,
-            disNumAbbSaved = gm.nm.disNumAbb,
-            overNumSaved = gm.nm.overNum,
-            moneySaved = gm.money,
+            ptsSaved = gm.pts,
             ClickAmountSaved = gm.ClickAmount,
             ClickMultSaved = gm.ClickMult,
             AutoClickSaved = gm.AutoClick,
@@ -99,10 +117,7 @@ public class SaveScript : MonoBehaviour
                 save = (Save)bf.Deserialize(fileStream);
             }
 
-            gm.nm.disNum = save.disNumSaved;
-            gm.nm.disNumAbb = save.disNumAbbSaved;
-            gm.nm.overNum = save.overNumSaved;
-            gm.money = save.moneySaved;
+            gm.pts = save.ptsSaved;
             gm.ClickAmount = save.ClickAmountSaved;
             gm.ClickMult = save.ClickMultSaved;
             gm.AutoClick = save.AutoClickSaved;

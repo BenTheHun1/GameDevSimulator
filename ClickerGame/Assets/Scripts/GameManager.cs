@@ -25,7 +25,8 @@ public class GameManager : MonoBehaviour
     public Text displayClickAmount;
     public Text displayAutoClick;
 
-    public NumberManager nm;
+    public double pts;
+    public string resource;
     public int era;
     public EvolveManager em;
     public string moneyType;
@@ -34,7 +35,6 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        nm = gameObject.GetComponent<NumberManager>();
         em = gameObject.GetComponent<EvolveManager>();
         era = 1;
         ClickAmount = 1;
@@ -60,20 +60,20 @@ public class GameManager : MonoBehaviour
 
     void Auto()
     {
-        nm.Add(AutoClick * AutoMult, 1);
+        pts += AutoClick * AutoMult;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //displayPts.text = pts.ToString("F0") + " Codes";
+        displayPts.text = pts.ToString("F0") + " " + resource;
         displayMoney.text = money.ToString("F2") + " " + moneyType;
-        displayClickAmount.text = nm.resourceType + "/Click: " + ClickAmount.ToString();
+        displayClickAmount.text = resource + "/Click: " + ClickAmount.ToString();
         if (ClickMult > 1)
         {
             displayClickAmount.text += " x " + ClickMult.ToString() + " = " + (ClickAmount * ClickMult).ToString();
         }
-        displayAutoClick.text = nm.resourceType + "/Sec: " + AutoClick.ToString();
+        displayAutoClick.text = resource + "/Sec: " + AutoClick.ToString();
         if (AutoMult > 1)
         {
             displayAutoClick.text += " x " + AutoMult.ToString() + " = " + (AutoClick * AutoMult).ToString();
@@ -82,14 +82,14 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.P))
         {
-            nm.Add(1000, 1);
+            pts += 1000;
         }
 
     }
 
     public void Click()
     {
-        nm.Add(ClickAmount * ClickMult, 1);
+        pts += ClickAmount * ClickMult;
         displayClickAmount.gameObject.GetComponent<AudioSource>().Play();
         clickparticles.Play();
     }

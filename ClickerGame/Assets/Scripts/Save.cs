@@ -6,10 +6,7 @@ using UnityEngine;
 public class Save
 {
     public List<int> upgradesTimesPurchased;
-    public int disNumSaved;
-    public int disNumAbbSaved;
-    public int overNumSaved;
-    public float moneySaved;
+    public double ptsSaved;
     public int ClickAmountSaved;
     public int ClickMultSaved;
     public int AutoClickSaved;

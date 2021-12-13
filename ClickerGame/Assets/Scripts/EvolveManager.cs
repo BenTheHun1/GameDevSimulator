@@ -8,33 +8,35 @@ public class EvolveManager : MonoBehaviour
     GameManager gm;
     public Button evolveButton;
     public Text displayEvolveCost;
-    int[] nextEraCost;
+    double nextEraCost;
 
     public Text buttonText;
+    public Text era;
+    public Text lore;
     public ParticleSystem clickparticles;
     public Image BG;
 
     public Material Era1Particle;
     public Material Era2Particle;
+    public Material Era3Particle;
 
     public Sprite Era1BG;
     public Sprite Era2BG;
+    public Sprite Era3BG;
 
 
     // Start is called before the first frame update
     void Start()
     {
         gm = gameObject.GetComponent<GameManager>();
-
-        nextEraCost = new int[2];
-        nextEraCost[0] = 5; nextEraCost[1] = 2;
+        nextEraCost = 5000f;
         
         evolveButton.onClick.AddListener(NextEra);
     }
 
     public void NextEra()
     {
-        if (gm.nm.disNum >= nextEraCost[0] && gm.nm.disNumAbb >= nextEraCost[1])
+        if (gm.pts >= nextEraCost)
         {
             gm.era++;
             ReloadEra();
@@ -46,23 +48,49 @@ public class EvolveManager : MonoBehaviour
     {
         if (gm.era == 1)
         {
-            nextEraCost[1] = 2;
-            displayEvolveCost.text = "To Next Era: " + gm.nm.FormatForDisplay(nextEraCost[0], nextEraCost[1]);
+            era.text = "Clicker Era";
+            displayEvolveCost.text = "To Next Era: " + nextEraCost;
             buttonText.text = "Code!";
-            gm.nm.resourceType = "Code";
+            gm.resource = "Code";
             gm.moneyType = "Dollars";
             clickparticles.gameObject.GetComponent<ParticleSystemRenderer>().material = Era1Particle;
             BG.sprite = Era1BG;
+            lore.text = "You, an amateur programmer, start developing a video game. What do the kids like these days? Watching numbers go up? A Clicker game is the way to go.";
+            foreach (GameObject ug in gm.upgradesInScene)
+            {
+                if (ug.GetComponent<Upgrade>().eraRequired == gm.era)
+                {
+                    ug.SetActive(true);
+                }
+                else
+                {
+                    ug.SetActive(false);
+                }
+            }
         }
         else if (gm.era == 2)
         {
-            nextEraCost[1] = 3;
-            displayEvolveCost.text = "To Next Era: " + gm.nm.FormatForDisplay(nextEraCost[0], nextEraCost[1]);
+            era.text = "RPG Era";
+            nextEraCost *= 10;
+            displayEvolveCost.text = "To Next Era: " + nextEraCost;
             buttonText.text = "Fight!";
-            gm.nm.resourceType = "EXP";
+            gm.resource = "EXP";
             gm.moneyType = "Gold";
             clickparticles.gameObject.GetComponent<ParticleSystemRenderer>().material = Era2Particle;
             BG.sprite = Era2BG;
+            lore.text = "You change your mind. Roleplaying games are all the rage. Japanese, Western, doesn't matter. You'll make a retro throwback RPG, no one ahs ever done that before. You retool your game to be an RPG.";
+        }
+        else if (gm.era == 3)
+        {
+            era.text = "FPS Era";
+            nextEraCost *= 10;
+            displayEvolveCost.text = "To Next Era: " + nextEraCost;
+            buttonText.text = "Shoot!";
+            gm.resource = "Kills";
+            gm.moneyType = "Keys";
+            clickparticles.gameObject.GetComponent<ParticleSystemRenderer>().material = Era3Particle;
+            BG.sprite = Era2BG;
+            lore.text = "No no no, what you really need is something Esports worthy. A first person shooter, emphasizing tactics and skill over randomness. You'll tread new ground, and make a game every will flock to. You retool your game to be an FPS.";
         }
     }
 }

@@ -47,6 +47,8 @@ public class Upgrade : MonoBehaviour
     bool projectCountdown;
     float curTTF;
 
+    public int eraRequired;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,13 +58,13 @@ public class Upgrade : MonoBehaviour
         disDesc.text = desc;
         if (isProject)
         {
-            disCost.text = currentCost.ToString();
+            disCost.text = currentCost.ToString() + gm.resource;
             disProgress.gameObject.SetActive(true);
             disProgressText.text = timeToFinish.ToString();
         }
         else
         {
-            disCost.text = "$" + currentCost.ToString();
+            disCost.text = currentCost.ToString() + gm.moneyType;
             disProgress.gameObject.SetActive(false);
         }
         disButton.onClick.AddListener(Buy);
@@ -70,15 +72,15 @@ public class Upgrade : MonoBehaviour
 
     public void Buy()
     {
-        if (isProject && (gm.nm.disNum >= currentCost && gm.nm.disNumAbb >= 1) && !projectCountdown)
+        if (isProject && gm.pts >= currentCost && !projectCountdown)
         {
-            gm.nm.Sub(currentCost, 1);
+            gm.pts -= currentCost;
             projectCountdown = true;
             curTTF = timeToFinish;
         }
         else if (!isProject && gm.money >= currentCost)
         {
-            gm.nm.Sub(currentCost, 1);
+            gm.pts -= currentCost;
             BuySuccess();
         }
     }

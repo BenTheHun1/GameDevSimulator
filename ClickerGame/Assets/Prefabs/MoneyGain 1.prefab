@@ -704,6 +704,7 @@ MonoBehaviour:
   upgradeKind: 2
   isProject: 1
   timeToFinish: 5
+  eraRequired: 1
 --- !u!1 &8542551865124799862
 GameObject:
   m_ObjectHideFlags: 0
