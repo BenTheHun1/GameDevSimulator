@@ -25,7 +25,7 @@ public class NumberManager : MonoBehaviour
         gm = gameObject.GetComponent<GameManager>();
         abb = new string[]
         {
-             "", ".", "T", "M", "B", "T", "Q", "Q"
+             "", ".", "K", "M", "B", "T", "q", "Q"
         };
         disNumAbb = 1;
     }

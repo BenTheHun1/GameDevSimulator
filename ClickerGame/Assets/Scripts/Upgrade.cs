@@ -70,7 +70,7 @@ public class Upgrade : MonoBehaviour
 
     public void Buy()
     {
-        if (isProject && gm.nm.disNum >= currentCost && !projectCountdown)
+        if (isProject && (gm.nm.disNum >= currentCost && gm.nm.disNumAbb >= 1) && !projectCountdown)
         {
             gm.nm.Sub(currentCost, 1);
             projectCountdown = true;

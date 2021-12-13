@@ -80,6 +80,11 @@ public class GameManager : MonoBehaviour
         }
         cam.transform.position = Vector3.Lerp(cam.transform.position, new Vector3(desiredPosition, cam.transform.position.y, cam.transform.position.z), Time.deltaTime * camSpeed);
 
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            nm.Add(1000, 1);
+        }
+
     }
 
     public void Click()
