@@ -605,7 +605,7 @@ GameObject:
   - component: {fileID: 7713282511834642525}
   - component: {fileID: 7188784264557404468}
   m_Layer: 5
-  m_Name: AutoUpgradeMult
+  m_Name: RPGMoneyAdd
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -692,19 +692,19 @@ MonoBehaviour:
   disButton: {fileID: 2264820243872912095}
   disProgress: {fileID: 8487910938270135781}
   disProgressText: {fileID: 8005623623128534746}
-  nam: Rewrite AI
-  desc: Double the efficiency of your AI
-  startingCost: 2000
+  nam: Sell your loot
+  desc: Offload your squid ears and crab teeth to the local shopkeep.
+  startingCost: 100
   currentCost: 0
-  upgradeType: 3
-  upgradeValue: 2
+  upgradeType: 4
+  upgradeValue: 10
   ShowThing: 0
   ThingToShow: {fileID: 0}
   timesPurchased: 0
-  upgradeKind: 1
+  upgradeKind: 2
   isProject: 1
-  timeToFinish: 20
-  eraRequired: 1
+  timeToFinish: 5
+  eraRequired: 2
 --- !u!1 &8542551865124799862
 GameObject:
   m_ObjectHideFlags: 0

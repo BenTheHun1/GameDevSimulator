@@ -7139,7 +7139,7 @@ GameObject:
   - component: {fileID: 1209579934}
   - component: {fileID: 1209579933}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Lore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7690,13 +7690,19 @@ MonoBehaviour:
   projectContainer: {fileID: 1750385110}
   upgradeList:
   - {fileID: 7561521198611064186, guid: 1360334c9355b134ea650e7da9366f9b, type: 3}
-  - {fileID: 7561521198611064186, guid: 05216d5fadc2e8340baa6a3d2679e5c5, type: 3}
   - {fileID: 7561521198611064186, guid: bad23054566f41e4f9979d56bc4455e0, type: 3}
   - {fileID: 7561521198611064186, guid: 19933aa6f4bf1cb45ac08c201e5c5cbc, type: 3}
-  - {fileID: 7561521198611064186, guid: 58305d10b40cd334ab0fa71610311cb6, type: 3}
   - {fileID: 7561521198611064186, guid: e525a36b00d7d9e448110349a6fc475f, type: 3}
   - {fileID: 7561521198611064186, guid: c2de2a451582f9244832fa33e77e26a5, type: 3}
+  - {fileID: 7561521198611064186, guid: 05216d5fadc2e8340baa6a3d2679e5c5, type: 3}
+  - {fileID: 7561521198611064186, guid: 58305d10b40cd334ab0fa71610311cb6, type: 3}
   - {fileID: 7561521198611064186, guid: 31b2df145e6274842963b45d40dfacdf, type: 3}
+  - {fileID: 7561521198611064186, guid: 6f8fc1070388dcb42aa7be886678f8be, type: 3}
+  - {fileID: 7561521198611064186, guid: 6f01b5f34e45da344b72b9be142b9981, type: 3}
+  - {fileID: 7561521198611064186, guid: 238e048c9440a174ca4e69597c232abf, type: 3}
+  - {fileID: 7561521198611064186, guid: 7ec570321942a5b4bb9986f18d26ea04, type: 3}
+  - {fileID: 7561521198611064186, guid: 3a0d2b39828292a4399b8d77672a9aba, type: 3}
+  - {fileID: 7561521198611064186, guid: 952713d4394592041b342d2aefe6311b, type: 3}
   upgradesInScene: []
   displayClickAmount: {fileID: 2059410399}
   displayAutoClick: {fileID: 1446555811}
@@ -7736,8 +7742,8 @@ MonoBehaviour:
   evolveButton: {fileID: 91404412}
   displayEvolveCost: {fileID: 866151988}
   buttonText: {fileID: 2026608204}
-  era: {fileID: 0}
-  lore: {fileID: 0}
+  era: {fileID: 1518940151}
+  lore: {fileID: 1209579933}
   clickparticles: {fileID: 396783627}
   BG: {fileID: 1493714897}
   Era1Particle: {fileID: 2100000, guid: 65356e92b898eb1409b1cc08e2108eab, type: 2}

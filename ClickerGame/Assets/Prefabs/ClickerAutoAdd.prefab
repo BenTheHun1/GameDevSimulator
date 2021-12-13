@@ -605,7 +605,7 @@ GameObject:
   - component: {fileID: 7713282511834642525}
   - component: {fileID: 7188784264557404468}
   m_Layer: 5
-  m_Name: AutoUpgradeN
+  m_Name: ClickerAutoAdd
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

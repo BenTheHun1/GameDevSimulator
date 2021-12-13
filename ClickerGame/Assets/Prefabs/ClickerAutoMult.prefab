@@ -605,7 +605,7 @@ GameObject:
   - component: {fileID: 7713282511834642525}
   - component: {fileID: 7188784264557404468}
   m_Layer: 5
-  m_Name: MoneyGain
+  m_Name: ClickerAutoMult
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -692,18 +692,18 @@ MonoBehaviour:
   disButton: {fileID: 2264820243872912095}
   disProgress: {fileID: 8487910938270135781}
   disProgressText: {fileID: 8005623623128534746}
-  nam: Make a Casual Game
-  desc: Make a simple game, to get some ad revenue.
-  startingCost: 100
+  nam: Rewrite AI
+  desc: Double the efficiency of your AI
+  startingCost: 2000
   currentCost: 0
-  upgradeType: 4
-  upgradeValue: 10
+  upgradeType: 3
+  upgradeValue: 2
   ShowThing: 0
   ThingToShow: {fileID: 0}
   timesPurchased: 0
-  upgradeKind: 2
+  upgradeKind: 1
   isProject: 1
-  timeToFinish: 5
+  timeToFinish: 20
   eraRequired: 1
 --- !u!1 &8542551865124799862
 GameObject:
