@@ -58,13 +58,13 @@ public class Upgrade : MonoBehaviour
         disDesc.text = desc;
         if (isProject)
         {
-            disCost.text = currentCost.ToString() + gm.resource;
+            disCost.text = currentCost.ToString() + " " + gm.resource;
             disProgress.gameObject.SetActive(true);
             disProgressText.text = timeToFinish.ToString();
         }
         else
         {
-            disCost.text = currentCost.ToString() + gm.moneyType;
+            disCost.text = currentCost.ToString() + " " + gm.moneyType;
             disProgress.gameObject.SetActive(false);
         }
         disButton.onClick.AddListener(Buy);

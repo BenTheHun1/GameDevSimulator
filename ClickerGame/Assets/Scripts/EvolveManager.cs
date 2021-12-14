@@ -91,6 +91,14 @@ public class EvolveManager : MonoBehaviour
                 if (ug.GetComponent<Upgrade>().eraRequired == gm.era)
                 {
                     ug.SetActive(true);
+                    if (ug.GetComponent<Upgrade>().isProject)
+                    {
+                        ug.GetComponent<Upgrade>().disCost.text = ug.GetComponent<Upgrade>().currentCost.ToString() + " " + gm.resource;
+                    }
+                    else
+                    {
+                        ug.GetComponent<Upgrade>().disCost.text = ug.GetComponent<Upgrade>().currentCost.ToString() + " " + gm.moneyType;
+                    }
                 }
                 else
                 {
@@ -115,6 +123,14 @@ public class EvolveManager : MonoBehaviour
                 if (ug.GetComponent<Upgrade>().eraRequired == gm.era)
                 {
                     ug.SetActive(true);
+                    if (ug.GetComponent<Upgrade>().isProject)
+                    {
+                        ug.GetComponent<Upgrade>().disCost.text = ug.GetComponent<Upgrade>().currentCost.ToString() + " " + gm.resource;
+                    }
+                    else
+                    {
+                        ug.GetComponent<Upgrade>().disCost.text = ug.GetComponent<Upgrade>().currentCost.ToString() + " " + gm.moneyType;
+                    }
                 }
                 else
                 {
@@ -139,6 +155,14 @@ public class EvolveManager : MonoBehaviour
                 if (ug.GetComponent<Upgrade>().eraRequired == gm.era)
                 {
                     ug.SetActive(true);
+                    if (ug.GetComponent<Upgrade>().isProject)
+                    {
+                        ug.GetComponent<Upgrade>().disCost.text = ug.GetComponent<Upgrade>().currentCost.ToString() + " " + gm.resource;
+                    }
+                    else
+                    {
+                        ug.GetComponent<Upgrade>().disCost.text = ug.GetComponent<Upgrade>().currentCost.ToString() + " " + gm.moneyType;
+                    }
                 }
                 else
                 {

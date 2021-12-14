@@ -102,7 +102,7 @@ public class GameManager : MonoBehaviour
     {
         if (dir == "l")
         {
-            desiredPosition = -230;
+            desiredPosition = -235;
         }
         else if (dir == "m")
         {
@@ -110,15 +110,15 @@ public class GameManager : MonoBehaviour
         }
         else if (dir == "r")
         {
-            desiredPosition = 230;
+            desiredPosition = 235;
         }
         else if (dir == "ll")
         {
-            desiredPosition = -460;
+            desiredPosition = -470;
         }
         else if (dir == "rr")
         {
-            desiredPosition = 460;
+            desiredPosition = 470;
         }
     }
 
