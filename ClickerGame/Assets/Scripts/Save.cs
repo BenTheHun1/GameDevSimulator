@@ -11,5 +11,7 @@ public class Save
     public int ClickMultSaved;
     public int AutoClickSaved;
     public int AutoMultSaved;
+    public int RAMSpeedSaved;
     public int eraSaved;
+    public float prestigeSaved;
 }

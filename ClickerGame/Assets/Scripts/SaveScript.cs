@@ -87,7 +87,9 @@ public class SaveScript : MonoBehaviour
             ClickMultSaved = gm.ClickMult,
             AutoClickSaved = gm.AutoClick,
             AutoMultSaved = gm.AutoMult,
+            RAMSpeedSaved = gm.RAMSpeed,
             eraSaved = gm.era,
+            prestigeSaved = gm.prestige,
             upgradesTimesPurchased = new List<int>()
         };
         foreach (GameObject upgrade in gm.upgradesInScene)
@@ -122,7 +124,9 @@ public class SaveScript : MonoBehaviour
             gm.ClickMult = save.ClickMultSaved;
             gm.AutoClick = save.AutoClickSaved;
             gm.AutoMult = save.AutoMultSaved;
+            gm.RAMSpeed = save.RAMSpeedSaved;
             gm.era = save.eraSaved;
+            gm.prestige = save.prestigeSaved;
             for (int i = 0; i < gm.upgradeList.Count; i++) 
             {
                 gm.upgradesInScene[i].GetComponent<Upgrade>().timesPurchased = save.upgradesTimesPurchased[i];

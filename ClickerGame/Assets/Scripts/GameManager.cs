@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour
     public string moneyType;
     public ParticleSystem clickparticles;
 
+    public float prestige;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,8 +44,6 @@ public class GameManager : MonoBehaviour
         AutoClick = 0;
         AutoMult = 1;
         RAMSpeed = 1;
-        //pts = 10000; //debug
-        //money = 10000; //debug
         foreach(GameObject up in upgradeList)
         {
             if (!up.GetComponent<Upgrade>().isProject)
@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
 
     void Auto()
     {
-        pts += AutoClick * AutoMult;
+        pts += AutoClick * AutoMult * ((100 + prestige * 10) / 100);
     }
 
     // Update is called once per frame
@@ -69,20 +69,24 @@ public class GameManager : MonoBehaviour
         displayPts.text = pts.ToString("F0") + " " + resource;
         displayMoney.text = money.ToString("F2") + " " + moneyType;
         displayClickAmount.text = resource + "/Click: " + ClickAmount.ToString();
-        if (ClickMult > 1)
+        if (ClickMult > 1 && ClickAmount > 0)
         {
             displayClickAmount.text += " x " + ClickMult.ToString() + " = " + (ClickAmount * ClickMult).ToString();
         }
         displayAutoClick.text = resource + "/Sec: " + AutoClick.ToString();
-        if (AutoMult > 1)
+        if (AutoMult > 1 && AutoClick > 0)
         {
             displayAutoClick.text += " x " + AutoMult.ToString() + " = " + (AutoClick * AutoMult).ToString();
+        }
+        if (prestige > 0 && AutoClick > 0)
+        {
+            displayAutoClick.text += " x " + ((100 + prestige * 10) / 100).ToString("F2");
         }
         cam.transform.position = Vector3.Lerp(cam.transform.position, new Vector3(desiredPosition, cam.transform.position.y, cam.transform.position.z), Time.deltaTime * camSpeed);
 
         if (Input.GetKeyDown(KeyCode.P))
         {
-            pts += 1000;
+            pts += 100000;
         }
 
     }
