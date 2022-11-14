@@ -12,7 +12,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: BenHunsicker
+  companyName: Ben Hunsicker
   productName: Game Dev Simulator
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -134,7 +134,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 1.0.0
+  bundleVersion: 1.0.1
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -274,7 +274,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: e80e50668b7da9d4b910923f3a3c7b1a, type: 3}
+      m_Icon: {fileID: 2800000, guid: 977e982bbb3b10a4f977ec520fd62a22, type: 3}
       m_Width: 128
       m_Height: 128
       m_Kind: 0
