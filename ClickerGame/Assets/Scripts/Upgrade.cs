@@ -165,11 +165,11 @@ public class Upgrade : MonoBehaviour
             else if (upgradeKind == quantity.Repeatable)
             {
                 currentCost = startingCost * Mathf.FloorToInt(Mathf.Pow(timesPurchased + 1, 2)); //TBD
-                disCost.text = "$" + currentCost.ToString();
+                disCost.text = currentCost.ToString() + " " + gm.moneyType;
             }
             if (isProject)
             {
-                disCost.text = currentCost.ToString();
+                disCost.text = currentCost.ToString() + " " + gm.resource;
                 disProgressText.text = timeToFinish.ToString();
                 disProgress.fillAmount = 1f;
             }
