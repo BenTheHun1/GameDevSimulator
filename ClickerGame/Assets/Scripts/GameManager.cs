@@ -3,13 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum type
+{
+    ClickAdd,
+    ClickMult,
+    AutoAdd,
+    AutoMult,
+    MoneyAdd,
+    RAMAdd,
+    RAMMult
+}
+public enum quantity
+{
+    Repeatable,
+    Single,
+    Static
+}
 public class GameManager : MonoBehaviour
 {
     public float money;
     public int ClickAmount;
     public int ClickMult;
-    public int AutoClick;
-    public int AutoMult;
+    public float AutoClick;
+    public float AutoMult;
     public int desiredPosition;
     public int RAMSpeed;
     public float camSpeed;
@@ -55,17 +71,19 @@ public class GameManager : MonoBehaviour
                 upgradesInScene.Add(Instantiate(up, projectContainer));
             }
         }
-        InvokeRepeating("Auto", 1.0f, 1.0f);
+        //InvokeRepeating("Auto", 1.0f, 1.0f);
     }
 
     void Auto()
     {
-        pts += AutoClick * AutoMult * ((100 + prestige * 10) / 100);
+        //pts += AutoClick * AutoMult * ((100 + prestige * 10) / 100);
     }
 
     // Update is called once per frame
     void Update()
     {
+        pts += (AutoClick * AutoMult * ((100 + prestige * 10) / 100)) * Time.deltaTime;
+
         displayPts.text = pts.ToString("F0") + " " + resource;
         displayMoney.text = money.ToString("F2") + " " + moneyType;
         displayClickAmount.text = resource + "/Click: " + ClickAmount.ToString();
@@ -89,6 +107,8 @@ public class GameManager : MonoBehaviour
             pts += 100000;
         }
 
+
+        //Debug.Log(Screen.width);
     }
 
     public void Click()

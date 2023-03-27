@@ -117,7 +117,7 @@ public class EvolveManager : MonoBehaviour
             gm.moneyType = "Gold";
             clickparticles.gameObject.GetComponent<ParticleSystemRenderer>().material = Era2Particle;
             BG.sprite = Era2BG;
-            lore.text = "You change your mind. Roleplaying games are all the rage. Japanese, Western, doesn't matter. You'll make a retro throwback RPG, no one ahs ever done that before. You retool your game to be an RPG.";
+            lore.text = "You change your mind. Roleplaying games are all the rage. Japanese, Western, doesn't matter. You'll make a retro throwback RPG, no one has ever done that before. You retool your game to be an RPG.";
             foreach (GameObject ug in gm.upgradesInScene)
             {
                 if (ug.GetComponent<Upgrade>().eraRequired == gm.era)

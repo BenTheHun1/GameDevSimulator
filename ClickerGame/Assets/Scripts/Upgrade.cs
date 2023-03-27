@@ -11,21 +11,10 @@ public class Upgrade : MonoBehaviour
     public Button disButton;
     public Image disProgress;
     public Text disProgressText;
-    GameManager gm;
     public string nam;
     public string desc;
     public int startingCost;
     public int currentCost;
-    public enum type
-    {
-        ClickAdd,
-        ClickMult,
-        AutoAdd,
-        AutoMult,
-        MoneyAdd,
-        RAMAdd,
-        RAMMult
-    }
     public type upgradeType;
     public int upgradeValue;
     public bool ShowThing;
@@ -33,12 +22,6 @@ public class Upgrade : MonoBehaviour
 
     public int timesPurchased;
 
-    public enum quantity
-    {
-        Repeatable,
-        Single,
-        Static
-    }
     public quantity upgradeKind;
 
     public bool isProject;
@@ -49,11 +32,14 @@ public class Upgrade : MonoBehaviour
 
     public int eraRequired;
 
+
+    private GameManager gm;
+
     // Start is called before the first frame update
     void Start()
     {
         currentCost = startingCost;
-        gm = GameObject.Find("WorldCanvas").GetComponent<GameManager>();
+        gm = FindObjectOfType<GameManager>();
         disName.text = nam;
         disDesc.text = desc;
         if (isProject)
@@ -80,7 +66,7 @@ public class Upgrade : MonoBehaviour
         }
         else if (!isProject && gm.money >= currentCost)
         {
-            gm.pts -= currentCost;
+            gm.money -= currentCost;
             BuySuccess();
         }
     }
@@ -127,11 +113,11 @@ public class Upgrade : MonoBehaviour
         else if (upgradeKind == quantity.Repeatable)
         {
             currentCost = startingCost * Mathf.FloorToInt(Mathf.Pow(timesPurchased+1, 2)); //TBD
-            disCost.text = "$" + currentCost.ToString();
+            disCost.text = currentCost.ToString() + " " + gm.moneyType;
         }
         if (isProject)
         {
-            disCost.text = currentCost.ToString();
+            disCost.text = currentCost.ToString() + " " + gm.resource;
             disProgressText.text = timeToFinish.ToString();
             disProgress.fillAmount = 1f;
         }

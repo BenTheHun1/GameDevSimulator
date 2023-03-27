@@ -24,7 +24,7 @@ public class SaveScript : MonoBehaviour
     {
         loading.SetActive(true);
         deleteSaveConfirm.SetActive(false);
-        AutoSaveTime = 30f;
+        AutoSaveTime = 10f;
         AutoSaveTimeCurrent = AutoSaveTime;
         gm = GetComponent<GameManager>();
         savePath = Application.persistentDataPath + "/gamesave.sav";
@@ -47,7 +47,6 @@ public class SaveScript : MonoBehaviour
         if (AutoSaveTimeCurrent <= 0)
         {
             SaveData();
-            AutoSaveTimeCurrent = AutoSaveTime;
         }
     }
 
@@ -105,6 +104,8 @@ public class SaveScript : MonoBehaviour
         }
 
         Debug.Log("Data Saved");
+
+        AutoSaveTimeCurrent = AutoSaveTime;
     }
 
     public void LoadData()

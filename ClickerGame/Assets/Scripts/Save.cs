@@ -9,8 +9,8 @@ public class Save
     public double ptsSaved;
     public int ClickAmountSaved;
     public int ClickMultSaved;
-    public int AutoClickSaved;
-    public int AutoMultSaved;
+    public float AutoClickSaved;
+    public float AutoMultSaved;
     public int RAMSpeedSaved;
     public int eraSaved;
     public float prestigeSaved;

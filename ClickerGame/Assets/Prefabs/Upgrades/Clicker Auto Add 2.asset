@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30fa7686072de55469d3ca9b93e0b101, type: 3}
+  m_Name: Clicker Auto Add 2
+  m_EditorClassIdentifier: 
+  nam: Write an AI
+  desc: Make an AI to write code for you.
+  startingCost: 400
+  upgradeType: 2
+  upgradeValue: 5
+  eraRequired: 1
+  isProject: 1
+  timeToFinish: 7
