@@ -53,6 +53,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Application.targetFrameRate = Device
         em = gameObject.GetComponent<EvolveManager>();
         era = 1;
         ClickAmount = 1;
