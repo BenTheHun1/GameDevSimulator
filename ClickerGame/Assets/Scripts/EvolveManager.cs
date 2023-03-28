@@ -42,7 +42,7 @@ public class EvolveManager : MonoBehaviour
 
     void Update()
     {
-        disPrestige.text = "Current: " + gm.prestige.ToString("F2") + " Reset for: " + (gm.pts / 1000).ToString("F2");
+        disPrestige.text = "Current: " + gm.prestige.ToString("F1") + "% Bonus; Reset for: " + (gm.pts / 1000).ToString("F1") + "% Bonus";
     }
 
     public void NextEra()
@@ -141,7 +141,9 @@ public class EvolveManager : MonoBehaviour
         else if (gm.era == 3)
         {
             era.text = "FPS Era";
-            evolveButton.enabled = false;
+            gm.pts -= nextEraCost;
+            nextEraCost *= 10;
+            evolveButton.gameObject.SetActive(false);
             resetOptions.SetActive(true);
             displayEvolveCost.text = "Max Era";
             buttonText.text = "Shoot!";

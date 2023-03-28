@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        pts += (AutoClick * AutoMult * ((100 + prestige * 10) / 100)) * Time.deltaTime;
+        pts += (AutoClick * AutoMult * ((100 + prestige) / 100)) * Time.deltaTime;
 
         displayPts.text = pts.ToString("F0") + " " + resource;
         displayMoney.text = money.ToString("F2") + " " + moneyType;
@@ -99,7 +99,7 @@ public class GameManager : MonoBehaviour
         }
         if (prestige > 0 && AutoClick > 0)
         {
-            displayAutoClick.text += " x " + ((100 + prestige * 10) / 100).ToString("F2");
+            displayAutoClick.text += " x " + ((100 + prestige) / 100).ToString("F2");
         }
         cam.transform.position = Vector3.Lerp(cam.transform.position, new Vector3(desiredPosition, cam.transform.position.y, cam.transform.position.z), Time.deltaTime * camSpeed);
 
