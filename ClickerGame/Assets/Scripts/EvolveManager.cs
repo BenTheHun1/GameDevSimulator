@@ -42,13 +42,17 @@ public class EvolveManager : MonoBehaviour
 
     void Update()
     {
-        disPrestige.text = "Current: " + gm.prestige.ToString("F1") + "% Bonus; Reset for: " + (gm.pts / 1000).ToString("F1") + "% Bonus";
+        disPrestige.text = "Current: " + gm.prestige.ToString("F1") + "% Bonus; Reset for: " + (gm.pts / 10000).ToString("F1") + "% Bonus";
     }
 
     public void NextEra()
     {
         if (gm.pts >= nextEraCost)
         {
+            gm.pts -= nextEraCost;
+            nextEraCost *= 10;
+            displayEvolveCost.text = "To Next Era: " + nextEraCost;
+
             gm.era++;
             ReloadEra();
         }
@@ -56,7 +60,7 @@ public class EvolveManager : MonoBehaviour
 
     public void Reset()
     {
-        gm.prestige += (float)gm.pts / 1000;
+        gm.prestige += (float)gm.pts / 10000;
         gm.pts = 0;
         gm.ClickAmount = 1;
         gm.ClickMult = 1;
@@ -79,7 +83,7 @@ public class EvolveManager : MonoBehaviour
         if (gm.era == 1)
         {
             era.text = "Clicker Era";
-            displayEvolveCost.text = "To Next Era: " + nextEraCost;
+
             buttonText.text = "Code!";
             gm.resource = "Code";
             gm.moneyType = "Dollars";
@@ -109,9 +113,8 @@ public class EvolveManager : MonoBehaviour
         else if (gm.era == 2)
         {
             era.text = "JRPG Era";
-            gm.pts -= nextEraCost;
-            nextEraCost *= 10;
-            displayEvolveCost.text = "To Next Era: " + nextEraCost;
+            
+            
             buttonText.text = "Fight!";
             gm.resource = "EXP";
             gm.moneyType = "Gold";
@@ -141,8 +144,7 @@ public class EvolveManager : MonoBehaviour
         else if (gm.era == 3)
         {
             era.text = "FPS Era";
-            gm.pts -= nextEraCost;
-            nextEraCost *= 10;
+
             evolveButton.gameObject.SetActive(false);
             resetOptions.SetActive(true);
             displayEvolveCost.text = "Max Era";
