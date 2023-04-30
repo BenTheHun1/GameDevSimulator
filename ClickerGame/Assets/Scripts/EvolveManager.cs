@@ -94,7 +94,7 @@ public class EvolveManager : MonoBehaviour
             {
                 if (ug.GetComponent<Upgrade>().eraRequired == gm.era)
                 {
-                    ug.SetActive(true);
+                    //ug.SetActive(true);
                     if (ug.GetComponent<Upgrade>().isProject)
                     {
                         ug.GetComponent<Upgrade>().disCost.text = ug.GetComponent<Upgrade>().currentCost.ToString() + " " + gm.resource;
@@ -125,7 +125,7 @@ public class EvolveManager : MonoBehaviour
             {
                 if (ug.GetComponent<Upgrade>().eraRequired == gm.era)
                 {
-                    ug.SetActive(true);
+                    //ug.SetActive(true);
                     if (ug.GetComponent<Upgrade>().isProject)
                     {
                         ug.GetComponent<Upgrade>().disCost.text = ug.GetComponent<Upgrade>().currentCost.ToString() + " " + gm.resource;
@@ -158,7 +158,7 @@ public class EvolveManager : MonoBehaviour
             {
                 if (ug.GetComponent<Upgrade>().eraRequired == gm.era)
                 {
-                    ug.SetActive(true);
+                    //ug.SetActive(true);
                     if (ug.GetComponent<Upgrade>().isProject)
                     {
                         ug.GetComponent<Upgrade>().disCost.text = ug.GetComponent<Upgrade>().currentCost.ToString() + " " + gm.resource;
