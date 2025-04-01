@@ -36,6 +36,7 @@ public class SaveScript : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         LoadData();
         yield return new WaitForSeconds(0.25f);
+		gm.StartPos();
         gm.em.ReloadEra();
         loading.SetActive(false);
     }

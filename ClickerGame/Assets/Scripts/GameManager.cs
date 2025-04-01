@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour
     public float prestige;
 
 	public List<GameObject> windows;
+	public Canvas worldCanvas;
 
     // Start is called before the first frame update
     void Start()
@@ -59,9 +60,11 @@ public class GameManager : MonoBehaviour
 		{
 			window.GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width * 2, 1000);
 		}
+		worldCanvas.GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width * 12, 1600);
 
-        //Application.targetFrameRate = Device
-        em = gameObject.GetComponent<EvolveManager>();
+
+		//Application.targetFrameRate = Device
+		em = gameObject.GetComponent<EvolveManager>();
         era = 1;
         ClickAmount = 1;
         ClickMult = 1;
@@ -79,8 +82,9 @@ public class GameManager : MonoBehaviour
                 upgradesInScene.Add(Instantiate(up, projectContainer));
             }
         }
-        //InvokeRepeating("Auto", 1.0f, 1.0f);
-    }
+		//InvokeRepeating("Auto", 1.0f, 1.0f);
+		//MoveCam("m");
+	}
 
     void Auto()
     {
@@ -90,7 +94,9 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        pts += (AutoClick * AutoMult * ((100 + prestige) / 100)) * Time.deltaTime;
+		//Debug.Log(windows[2].transform.position.x);
+
+		pts += (AutoClick * AutoMult * ((100 + prestige) / 100)) * Time.deltaTime;
 
         displayPts.text = pts.ToString("F0") + " " + resource;
         displayMoney.text = money.ToString("F2") + " " + moneyType;
@@ -141,15 +147,15 @@ public class GameManager : MonoBehaviour
 		}
         else if (dir == "m")
         {
-            desiredPosition = 0;
-        }
+            //desiredPosition = 0;
+			desiredPosition = windows[2].transform.position.x;
+		}
         else if (dir == "r")
         {
 			//desiredPosition = 235;
 
 			desiredPosition = windows[3].transform.position.x;
 		}
-       
         else if (dir == "rr")
         {
 			//desiredPosition = 470;
@@ -158,6 +164,13 @@ public class GameManager : MonoBehaviour
 		}
 
 		LeanTween.move(cam.gameObject, new Vector3(desiredPosition, cam.transform.position.y, cam.transform.position.z), 0.1f);
+		Debug.Log("Moving to " + desiredPosition + " at " + dir);
 	}
 
+	public void StartPos()
+	{
+		desiredPosition = windows[2].transform.position.x;
+		LeanTween.move(cam.gameObject, new Vector3(desiredPosition, cam.transform.position.y, cam.transform.position.z), 0f);
+	}
+	
 }
