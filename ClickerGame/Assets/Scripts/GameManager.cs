@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     public int ClickMult;
     public float AutoClick;
     public float AutoMult;
-    public int desiredPosition;
+    public float desiredPosition;
     public int RAMSpeed;
     public float camSpeed;
     public Text displayPts;
@@ -50,9 +50,16 @@ public class GameManager : MonoBehaviour
 
     public float prestige;
 
+	public List<GameObject> windows;
+
     // Start is called before the first frame update
     void Start()
     {
+		foreach (GameObject window in windows)
+		{
+			window.GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width * 2, 1000);
+		}
+
         //Application.targetFrameRate = Device
         em = gameObject.GetComponent<EvolveManager>();
         era = 1;
@@ -101,7 +108,7 @@ public class GameManager : MonoBehaviour
         {
             displayAutoClick.text += " x " + ((100 + prestige) / 100).ToString("F2");
         }
-        cam.transform.position = Vector3.Lerp(cam.transform.position, new Vector3(desiredPosition, cam.transform.position.y, cam.transform.position.z), Time.deltaTime * camSpeed);
+        //cam.transform.position = Vector3.Lerp(cam.transform.position, new Vector3(desiredPosition, cam.transform.position.y, cam.transform.position.z), Time.deltaTime * camSpeed);
 
         if (Input.GetKeyDown(KeyCode.P))
         {
@@ -121,26 +128,36 @@ public class GameManager : MonoBehaviour
 
     public void MoveCam(string dir)
     {
-        if (dir == "l")
+		if (dir == "ll")
+		{
+			//desiredPosition = -470;
+
+			desiredPosition = windows[0].transform.position.x;
+		}
+		else if (dir == "l")
         {
-            desiredPosition = -235;
-        }
+			//desiredPosition = -235;
+			desiredPosition = windows[1].transform.position.x;
+		}
         else if (dir == "m")
         {
             desiredPosition = 0;
         }
         else if (dir == "r")
         {
-            desiredPosition = 235;
-        }
-        else if (dir == "ll")
-        {
-            desiredPosition = -470;
-        }
+			//desiredPosition = 235;
+
+			desiredPosition = windows[3].transform.position.x;
+		}
+       
         else if (dir == "rr")
         {
-            desiredPosition = 470;
-        }
-    }
+			//desiredPosition = 470;
+
+			desiredPosition = windows[4].transform.position.x;
+		}
+
+		LeanTween.move(cam.gameObject, new Vector3(desiredPosition, cam.transform.position.y, cam.transform.position.z), 0.1f);
+	}
 
 }
