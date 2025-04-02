@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
 		worldCanvas.GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.currentResolution.width * 4, 1600);
 
 
-		//Application.targetFrameRate = Device
+		Application.targetFrameRate = 60;
 		em = gameObject.GetComponent<EvolveManager>();
         era = 1;
         ClickAmount = 1;
