@@ -53,6 +53,8 @@ public class GameManager : MonoBehaviour
 
 	public List<GameObject> windows;
 	public Canvas worldCanvas;
+	public TextMeshProUGUI versionDisplay;
+	public float curPosition;
 
     // Start is called before the first frame update
     void Start()
@@ -64,7 +66,7 @@ public class GameManager : MonoBehaviour
 		}
 		worldCanvas.GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.currentResolution.width * 4, 1600);
 
-
+		versionDisplay.text = Application.version;
 		Application.targetFrameRate = 60;
 		em = gameObject.GetComponent<EvolveManager>();
         era = 1;
@@ -118,14 +120,34 @@ public class GameManager : MonoBehaviour
         }
         //cam.transform.position = Vector3.Lerp(cam.transform.position, new Vector3(desiredPosition, cam.transform.position.y, cam.transform.position.z), Time.deltaTime * camSpeed);
 
-        if (Input.GetKeyDown(KeyCode.P))
+        /*if (Input.GetKeyDown(KeyCode.P))
         {
             pts += 100000;
-        }
+        }*/
 
+		if (Input.GetKeyDown(KeyCode.Alpha1))
+		{
+			MoveCam(0);
+		}
+		else if (Input.GetKeyDown(KeyCode.Alpha2))
+		{
+			MoveCam(1);
+		}
+		else if (Input.GetKeyDown(KeyCode.Alpha3))
+		{
+			MoveCam(2);
+		}
+		else if (Input.GetKeyDown(KeyCode.Alpha4))
+		{
+			MoveCam(3);
+		}
+		else if (Input.GetKeyDown(KeyCode.Alpha5))
+		{
+			MoveCam(4);
+		}
 
-        //Debug.Log(Screen.width);
-    }
+		//Debug.Log(Screen.width);
+	}
 
     public void Click()
     {
@@ -134,45 +156,48 @@ public class GameManager : MonoBehaviour
         clickparticles.Play();
     }
 
-    public void MoveCam(string dir)
+    public void MoveCam(int pos)
     {
-		if (dir == "ll")
+		if (pos == 0)
 		{
 			//desiredPosition = -470;
 
 			desiredPosition = windows[0].transform.position.x;
 		}
-		else if (dir == "l")
+		else if (pos == 1)
         {
 			//desiredPosition = -235;
 			desiredPosition = windows[1].transform.position.x;
 		}
-        else if (dir == "m")
+        else if (pos == 2)
         {
             //desiredPosition = 0;
 			desiredPosition = windows[2].transform.position.x;
 		}
-        else if (dir == "r")
+        else if (pos == 3)
         {
 			//desiredPosition = 235;
 
 			desiredPosition = windows[3].transform.position.x;
 		}
-        else if (dir == "rr")
+        else if (pos == 4)
         {
 			//desiredPosition = 470;
 
 			desiredPosition = windows[4].transform.position.x;
 		}
-
-		LeanTween.move(cam.gameObject, new Vector3(desiredPosition, cam.transform.position.y, cam.transform.position.z), 0.1f);
-		Debug.Log("Moving to " + desiredPosition + " at " + dir);
+		float speed = 0.2f * Mathf.Abs(pos - curPosition);
+		LeanTween.cancelAll();
+		LeanTween.move(cam.gameObject, new Vector3(desiredPosition, cam.transform.position.y, cam.transform.position.z), speed);
+		curPosition = pos;
+		Debug.Log("Moving to " + desiredPosition + " at position " + pos + " with speed " + speed);
 	}
 
 	public void StartPos()
 	{
 		desiredPosition = windows[2].transform.position.x;
 		LeanTween.move(cam.gameObject, new Vector3(desiredPosition, cam.transform.position.y, cam.transform.position.z), 0f);
+		curPosition = 2;
 	}
 	
 }

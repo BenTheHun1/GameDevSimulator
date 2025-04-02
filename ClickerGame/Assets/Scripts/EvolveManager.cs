@@ -120,6 +120,7 @@ public class EvolveManager : MonoBehaviour
             gm.moneyType = "Gold";
             clickparticles.gameObject.GetComponent<ParticleSystemRenderer>().material = Era2Particle;
             BG.sprite = Era2BG;
+			BG.preserveAspect = false;
             lore.text = "You change your mind. Roleplaying games are all the rage. Japanese, Western, doesn't matter. You'll make a retro throwback RPG, no one has ever done that before. You retool your game to be an RPG.";
             foreach (GameObject ug in gm.upgradesInScene)
             {
@@ -153,7 +154,8 @@ public class EvolveManager : MonoBehaviour
             gm.moneyType = "Keys";
             clickparticles.gameObject.GetComponent<ParticleSystemRenderer>().material = Era3Particle;
             BG.sprite = Era3BG;
-            lore.text = "No no no, what you really need is something Esports worthy. A first person shooter, emphasizing tactics and skill over randomness. You'll tread new ground, and make a game every will flock to. You retool your game to be an FPS.";
+			BG.preserveAspect = true;
+			lore.text = "No no no, what you really need is something Esports worthy. A first person shooter, emphasizing tactics and skill over randomness. You'll tread new ground, and make a game every will flock to. You retool your game to be an FPS.";
             foreach (GameObject ug in gm.upgradesInScene)
             {
                 if (ug.GetComponent<Upgrade>().eraRequired == gm.era)
