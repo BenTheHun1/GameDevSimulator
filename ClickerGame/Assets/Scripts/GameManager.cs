@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,7 +30,7 @@ public class GameManager : MonoBehaviour
     public float desiredPosition;
     public int RAMSpeed;
     public float camSpeed;
-    public Text displayPts;
+    public TextMeshProUGUI displayPts;
     public Text displayMoney;
     public Camera cam;
 
@@ -56,11 +57,12 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+		Debug.Log(Screen.currentResolution.width);
 		foreach (GameObject window in windows)
 		{
-			window.GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width * 2, 1000);
+			window.GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.currentResolution.width / 1.5f, 1000);
 		}
-		worldCanvas.GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width * 12, 1600);
+		worldCanvas.GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.currentResolution.width * 4, 1600);
 
 
 		//Application.targetFrameRate = Device
