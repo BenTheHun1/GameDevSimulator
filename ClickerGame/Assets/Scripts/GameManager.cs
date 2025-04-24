@@ -22,7 +22,8 @@ public enum quantity
 }
 public class GameManager : MonoBehaviour
 {
-    public float money;
+	public bool debugMode;
+	public float money;
     public int ClickAmount;
     public int ClickMult;
     public float AutoClick;
@@ -56,6 +57,9 @@ public class GameManager : MonoBehaviour
 	public TextMeshProUGUI versionDisplay;
 	public float curPosition;
 
+	public GameObject quitGame;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -67,7 +71,19 @@ public class GameManager : MonoBehaviour
 		worldCanvas.GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.currentResolution.width * 4, 1600);
 
 		versionDisplay.text = Application.version;
-		Application.targetFrameRate = 60;
+		if (SystemInfo.deviceType == DeviceType.Handheld)
+		{
+			Application.targetFrameRate = 60;
+		}
+
+		if (SystemInfo.deviceType == DeviceType.Desktop && (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor))
+		{
+			quitGame.gameObject.SetActive(true);
+		}
+		else
+		{
+			quitGame.gameObject.SetActive(false);
+		}
 		em = gameObject.GetComponent<EvolveManager>();
         era = 1;
         ClickAmount = 1;
@@ -120,10 +136,10 @@ public class GameManager : MonoBehaviour
         }
         //cam.transform.position = Vector3.Lerp(cam.transform.position, new Vector3(desiredPosition, cam.transform.position.y, cam.transform.position.z), Time.deltaTime * camSpeed);
 
-        /*if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P) && debugMode)
         {
             pts += 100000;
-        }*/
+        }
 
 		if (Input.GetKeyDown(KeyCode.Alpha1))
 		{
@@ -158,35 +174,8 @@ public class GameManager : MonoBehaviour
 
     public void MoveCam(int pos)
     {
-		if (pos == 0)
-		{
-			//desiredPosition = -470;
-
-			desiredPosition = windows[0].transform.position.x;
-		}
-		else if (pos == 1)
-        {
-			//desiredPosition = -235;
-			desiredPosition = windows[1].transform.position.x;
-		}
-        else if (pos == 2)
-        {
-            //desiredPosition = 0;
-			desiredPosition = windows[2].transform.position.x;
-		}
-        else if (pos == 3)
-        {
-			//desiredPosition = 235;
-
-			desiredPosition = windows[3].transform.position.x;
-		}
-        else if (pos == 4)
-        {
-			//desiredPosition = 470;
-
-			desiredPosition = windows[4].transform.position.x;
-		}
-		float speed = 0.2f * Mathf.Abs(pos - curPosition);
+		desiredPosition = windows[pos].transform.position.x;
+		float speed = 0.0005f * Mathf.Abs(windows[pos].transform.position.x - cam.transform.position.x);
 		LeanTween.cancelAll();
 		LeanTween.move(cam.gameObject, new Vector3(desiredPosition, cam.transform.position.y, cam.transform.position.z), speed);
 		curPosition = pos;

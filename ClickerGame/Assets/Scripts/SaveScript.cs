@@ -35,10 +35,11 @@ public class SaveScript : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         LoadData();
-        yield return new WaitForSeconds(0.25f);
 		gm.StartPos();
+		yield return new WaitForSeconds(0.125f);
         gm.em.ReloadEra();
-        loading.SetActive(false);
+		yield return new WaitForSeconds(0.125f);
+		loading.SetActive(false);
     }
 
     private void Update()
@@ -47,7 +48,7 @@ public class SaveScript : MonoBehaviour
         disAutoSave.text = "AutoSave in " + AutoSaveTimeCurrent.ToString("F0");
         if (AutoSaveTimeCurrent <= 0)
         {
-            SaveData();
+            SaveData(false);
         }
     }
 
@@ -78,7 +79,7 @@ public class SaveScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void SaveData()
+    public void SaveData(bool quitGame)
     {
         var save = new Save()
         {
@@ -107,6 +108,12 @@ public class SaveScript : MonoBehaviour
         Debug.Log("Data Saved");
 
         AutoSaveTimeCurrent = AutoSaveTime;
+
+		if (quitGame)
+		{
+			Application.Quit();
+		}
+
     }
 
     public void LoadData()

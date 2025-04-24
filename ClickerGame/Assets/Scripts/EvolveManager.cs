@@ -29,6 +29,9 @@ public class EvolveManager : MonoBehaviour
 
     public Text disPrestige;
 
+	public ScrollRect projectScroll;
+	public ScrollRect upgradeScroll;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,9 +53,6 @@ public class EvolveManager : MonoBehaviour
         if (gm.pts >= nextEraCost)
         {
             gm.pts -= nextEraCost;
-            nextEraCost *= 10;
-            displayEvolveCost.text = "To Next Era: " + nextEraCost;
-
             gm.era++;
             ReloadEra();
         }
@@ -73,7 +73,7 @@ public class EvolveManager : MonoBehaviour
         {
             upgrade.GetComponent<Upgrade>().timesPurchased = 0;
         }
-        gameObject.GetComponent<SaveScript>().SaveData();
+        gameObject.GetComponent<SaveScript>().SaveData(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -92,7 +92,7 @@ public class EvolveManager : MonoBehaviour
             lore.text = "You, an amateur programmer, start developing a video game. What do the kids like these days? Watching numbers go up? A Clicker game is the way to go.";
             foreach (GameObject ug in gm.upgradesInScene)
             {
-                if (ug.GetComponent<Upgrade>().eraRequired == gm.era)
+                if (ug.GetComponent<Upgrade>().eraRequired == gm.era && !(ug.GetComponent<Upgrade>().upgradeKind == quantity.Single && ug.GetComponent<Upgrade>().timesPurchased >= 1))
                 {
                     ug.SetActive(true);
                     if (ug.GetComponent<Upgrade>().isProject)
@@ -122,9 +122,12 @@ public class EvolveManager : MonoBehaviour
             BG.sprite = Era2BG;
 			BG.preserveAspect = false;
             lore.text = "You change your mind. Roleplaying games are all the rage. Japanese, Western, doesn't matter. You'll make a retro throwback RPG, no one has ever done that before. You retool your game to be an RPG.";
-            foreach (GameObject ug in gm.upgradesInScene)
+
+			nextEraCost = 50000;
+			displayEvolveCost.text = "To Next Era: " + nextEraCost;
+			foreach (GameObject ug in gm.upgradesInScene)
             {
-                if (ug.GetComponent<Upgrade>().eraRequired == gm.era)
+                if (ug.GetComponent<Upgrade>().eraRequired == gm.era && !(ug.GetComponent<Upgrade>().upgradeKind == quantity.Single && ug.GetComponent<Upgrade>().timesPurchased >= 1))
                 {
                     ug.SetActive(true);
                     if (ug.GetComponent<Upgrade>().isProject)
@@ -156,9 +159,12 @@ public class EvolveManager : MonoBehaviour
             BG.sprite = Era3BG;
 			BG.preserveAspect = true;
 			lore.text = "No no no, what you really need is something Esports worthy. A first person shooter, emphasizing tactics and skill over randomness. You'll tread new ground, and make a game every will flock to. You retool your game to be an FPS.";
-            foreach (GameObject ug in gm.upgradesInScene)
+
+			nextEraCost = 500000;
+			displayEvolveCost.text = "To Next Era: " + nextEraCost;
+			foreach (GameObject ug in gm.upgradesInScene)
             {
-                if (ug.GetComponent<Upgrade>().eraRequired == gm.era)
+                if (ug.GetComponent<Upgrade>().eraRequired == gm.era && !(ug.GetComponent<Upgrade>().upgradeKind == quantity.Single && ug.GetComponent<Upgrade>().timesPurchased >= 1))
                 {
                     ug.SetActive(true);
                     if (ug.GetComponent<Upgrade>().isProject)
@@ -176,5 +182,7 @@ public class EvolveManager : MonoBehaviour
                 }
             }
         }
+		projectScroll.verticalNormalizedPosition = 1;
+		upgradeScroll.verticalNormalizedPosition = 1;
     }
 }
