@@ -59,6 +59,8 @@ public class GameManager : MonoBehaviour
 
 	public GameObject quitGame;
 
+	public AudioClip clickSound;
+
 
     // Start is called before the first frame update
     void Start()
@@ -168,7 +170,7 @@ public class GameManager : MonoBehaviour
     public void Click()
     {
         pts += ClickAmount * ClickMult;
-        displayClickAmount.gameObject.GetComponent<AudioSource>().Play();
+		GetComponent<AudioSource>().PlayOneShot(clickSound);
         clickparticles.Play();
     }
 

@@ -109,6 +109,9 @@ public class SaveScript : MonoBehaviour
 
         AutoSaveTimeCurrent = AutoSaveTime;
 
+		PlayerPrefs.SetString("forceSave", string.Empty);
+		PlayerPrefs.Save();
+
 		if (quitGame)
 		{
 			Application.Quit();
